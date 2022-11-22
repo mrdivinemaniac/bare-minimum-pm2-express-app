@@ -1,5 +1,5 @@
 {
-  "name": "nginx-example-project",
+  "name": "bare-minimum-pm2-express-app",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
