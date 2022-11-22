@@ -8,6 +8,15 @@ app.get("/", (req, res) => {
   res.send(`This is running on port ${HTTP_PORT}`);
 });
 
-app.listen(HTTP_PORT, () => {
+const server = app.listen(HTTP_PORT, () => {
   console.log(`App listening on port ${HTTP_PORT}`);
+  process.send("ready");
+});
+
+process.on("SIGINT", function () {
+  console.log("Shutting down gracefully");
+  server.close((err) => {
+    if (err) console.error(err.message);
+    process.exit(err ? 1 : 0);
+  });
 });
