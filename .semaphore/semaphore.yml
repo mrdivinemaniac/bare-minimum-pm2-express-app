@@ -5,12 +5,12 @@ agent:
     type: e1-standard-2
     os_image: ubuntu2004
 blocks:
-	  - name: Run Tests
-	    task:
-	      jobs:
-	        - name: Run Tests
-	          commands:
-	            - npm run test
+  - name: Run Tests
+    task:
+      jobs:
+        - name: Run Tests
+          commands:
+            - npm run test
   - name: Deploy
     dependencies:
       - Run Tests
