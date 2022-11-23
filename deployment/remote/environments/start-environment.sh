@@ -18,11 +18,6 @@ if [ -z "$SUBDOMAIN"]; then
   SUBDOMAIN=$NAME
 fi
 
-# Fallback to the main branch if unspecified
-if [ -z "$GIT_IDENTIFIER" ]; then
-  GIT_IDENTIFIER="main"
-fi
-
 echo "Starting environment $NAME on HTTP port $HTTP_PORT"
 
 # Check if port is available
