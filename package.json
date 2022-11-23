@@ -1,10 +1,11 @@
 {
   "name": "bare-minimum-pm2-express-app",
-  "version": "1.1.0",
+  "version": "2.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./index.js"
+    "start": "node ./index.js",
+    "test": "echo 'Lets just assume that all tests have passed'"
   },
   "author": "",
   "license": "ISC",
