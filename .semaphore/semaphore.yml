@@ -6,6 +6,7 @@ agent:
     os_image: ubuntu2004
 blocks:
   - name: Run Tests
+    dependencies: []
     task:
       jobs:
         - name: Run Tests
