@@ -42,7 +42,7 @@ else
 fi
 
 echo "Installing dependencies"
-npm install
+npm install --omit=dev
 
 echo "Pushing code to remote"
 APP_NAME=$(echo_pm2_app_name $ENV_NAME)
