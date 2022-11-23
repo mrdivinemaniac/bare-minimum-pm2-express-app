@@ -10,7 +10,6 @@ blocks:
       jobs:
         - name: SSH and Deploy
           commands:
-            - echo $DEPLOYMENT_KEY
             - echo "$DEPLOYMENT_KEY" | base64 --decode > deployment.key
             - chmod 400 deployment.key
             - ssh -o StrictHostKeyChecking=no -i deployment.key $SSH_TARGET "rm -rf ~/deployment"
