@@ -1,11 +1,19 @@
 version: v1.0
-name: Initial Pipeline
+name: Deploy Pipeline
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu2004
 blocks:
-  - name: Main
+	  - name: Run Tests
+	    task:
+	      jobs:
+	        - name: Run Tests
+	          commands:
+	            - npm run test
+  - name: Deploy
+    dependencies:
+      - Run Tests
     task:
       jobs:
         - name: SSH and Deploy
@@ -19,6 +27,3 @@ blocks:
             - ssh -o StrictHostKeyChecking=no -i deployment.key $SSH_TARGET "cd ~/ && bash ./deployment/start-blue-green-non-live.sh"
       secrets:
         - name: MY_APP_DEPLOYMENT_SSH
-promotions:
-  - name: Promote to Production
-    pipeline_file: promote-to-production.yml
