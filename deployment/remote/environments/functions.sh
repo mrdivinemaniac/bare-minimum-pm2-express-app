@@ -1,6 +1,6 @@
 #!/bin/bash
 # Make sure to change the value of USERNAME below
-USERNAME="username"
+USERNAME="ec2-user"
 export GIT_REPO="git@github.com:mrdivinemaniac/bare-minimum-pm2-express-app.git"
 export ENV_DIRECTORY="/home/$USERNAME/app/environments"
 export NGINX_CONFIGS_DIRECTORY="/etc/nginx"
