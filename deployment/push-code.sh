@@ -44,7 +44,6 @@ APP_NAME=$(echo_pm2_app_name $ENV_NAME)
 TARGET_CODE_DIRECTORY="$ENV_DIRECTORY/$APP_NAME"
 ssh -o StrictHostKeyChecking=no -i $KEY_FILE_PATH $SSH_TARGET "rm -rf $TARGET_CODE_DIRECTORY"
 rsync -Pav -e "ssh -i $KEY_FILE_PATH" /tmp/deploy-checkout/* $SSH_TARGET:$TARGET_CODE_DIRECTORY
-# scp -r -o StrictHostKeyChecking=no -i $KEY_FILE_PATH /tmp/deploy-checkout $SSH_TARGET:$TARGET_CODE_DIRECTORY
 
 echo "Cleaning Up"
 rm -rf $TMP_DIRECTORY
