@@ -11,6 +11,8 @@ blocks:
       jobs:
         - name: Run Tests
           commands:
+            - checkout
+            - npm install
             - npm run test
   - name: Deploy
     dependencies:
