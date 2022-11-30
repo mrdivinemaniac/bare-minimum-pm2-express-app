@@ -1,11 +1,10 @@
 #!/bin/bash
-USERNAME="username" # Make sure to change the value of USERNAME to your ssh user
 export GIT_REPO="git@github.com:mrdivinemaniac/bare-minimum-pm2-express-app.git"
-export ENV_DIRECTORY="/home/$USERNAME/app/environments"
+export ENV_DIRECTORY="$HOME/app/environments"
 export NGINX_CONFIGS_DIRECTORY="/etc/nginx"
 export SERVICE_DOMAIN="myapp.local"
-export ENV_NGINX_CONFIG_TEMPLATE="/home/$USERNAME/deployment/environments/env-nginx-config-template"
-export LIVE_NGINX_CONFIG_TEMPLATE="/home/$USERNAME/deployment/environments/env-nginx-config-template"
+export ENV_NGINX_CONFIG_TEMPLATE="$HOME/deployment/environments/env-nginx-config-template"
+export LIVE_NGINX_CONFIG_TEMPLATE="$HOME/deployment/environments/env-nginx-config-template"
 
 create_nginx_config () {
   local TEMPLATE_PATH=$1 #The file to use to use a template
