@@ -20,8 +20,10 @@ fi
 
 echo "Starting environment $NAME on HTTP port $HTTP_PORT"
 
+# The lsof utility can be in either /bin or /sbin. The which utility gives us the path to wherever it is.
+PATH_TO_LSOF=$(which lsof)
 # Check if port is available
-PORT_ENTRY="$(lsof -i -P -n | grep "$HTTP_PORT (LISTEN)")"
+PORT_ENTRY="$($PATH_TO_LSOF -i -P -n | grep "$HTTP_PORT (LISTEN)")"
 if [ ! -z "$PORT_ENTRY" ]; then
   echo "Port $HTTP_PORT already has a listener. Ensuring $NAME is running on this port..."
   assert_env_port $NAME $HTTP_PORT
