@@ -1,0 +1,35 @@
+version: v1.0
+name: Deploy Pipeline
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+blocks:
+  - name: Run Tests
+    dependencies: []
+    task:
+      jobs:
+        - name: Run Tests
+          commands:
+            - checkout
+            - npm install
+            - npm run test
+  - name: Deploy
+    dependencies:
+      - Run Tests
+    task:
+      jobs:
+        - name: SSH and Deploy
+          commands:
+            - checkout
+            - echo "$DEPLOYMENT_KEY" | base64 --decode > deployment.key
+            - chmod 400 deployment.key
+            - ssh -o StrictHostKeyChecking=no -i deployment.key $SSH_TARGET "rm -rf ~/deployment"
+            - scp -r -o StrictHostKeyChecking=no -i deployment.key ./deployment/remote $SSH_TARGET:~/deployment
+            - KEY_FILE_PATH=deployment.key SSH_TARGET=$SSH_TARGET REPOSITORY_DIRECTORY=~/$SEMAPHORE_GIT_DIR bash ./deployment/push-code-blue-green-non-live.sh
+            - ssh -o StrictHostKeyChecking=no -i deployment.key $SSH_TARGET "cd ~/ && bash ./deployment/start-blue-green-non-live.sh"
+      secrets:
+        - name: MY_APP_DEPLOYMENT_SSH
+promotions:
+  - name: Promote to Production
+    pipeline_file: promote-to-production.yml
